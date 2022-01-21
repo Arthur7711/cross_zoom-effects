@@ -36,16 +36,16 @@ window.addEventListener("load", () => {
         type: "1f",
         value: 0,
       },
-      to: {
-        name: "uTo",
-        type: "1f",
-        value: 0,
-      },
-      from: {
-        name: "uFrom",
-        type: "1f",
-        value: 0,
-      },
+      // to: {
+      //   name: "uTo",
+      //   type: "1f",
+      //   value: 0,
+      // },
+      // from: {
+      //   name: "uFrom",
+      //   type: "1f",
+      //   value: 0,
+      // },
     },
   };
 
@@ -83,44 +83,46 @@ window.addEventListener("load", () => {
       //   });
       // });
 
+      // MEZ PETQAKAN ANIMATIAN GTNVUMA ESTEX!!!
+
       navElements.forEach((nav) => {
         nav.addEventListener("click", (event) => {
-          let to = event.target.getAttribute("data-nav");
-          if (isRunning || to == currentTexture) return;
-          var elems = document.querySelectorAll(".frame__switch-item");
-          [].forEach.call(elems, function (el) {
-            el.classList.remove("frame__switch-item--current");
-          });
-          event.target.classList.add("frame__switch-item--current");
-          isRunning = true;
+          // let to = event.target.getAttribute("data-nav");
+          // if (isRunning || to == currentTexture) return;
+          // var elems = document.querySelectorAll(".frame__switch-item");
+          // [].forEach.call(elems, function (el) {
+          //   el.classList.remove("frame__switch-item--current");
+          // });
+          // event.target.classList.add("frame__switch-item--current");
+          // isRunning = true;
 
-          multiTexturesPlane.uniforms.to.value = to;
+          // multiTexturesPlane.uniforms.to.value = to;
 
           let fake = { progress: 0 };
           gsap.to(fake, {
             duration: duration,
             progress: 1,
             easing: "power2.in",
-            onStart: () => {
-              multiTexturesPlane.videos[to].play();
-              currentTexture = to;
-            },
+            // onStart: () => {
+            //   multiTexturesPlane.videos[to].play();
+            //   currentTexture = to;
+            // },
             onUpdate: () => {
               if (fake.progress === 1) {
                 multiTexturesPlane.uniforms.from.value = to;
               }
               multiTexturesPlane.uniforms.transitionTimer.value = fake.progress;
             },
-            onComplete: () => {
-              multiTexturesPlane.uniforms.from.value = to;
-              multiTexturesPlane.videos[
-                (currentTexture + length - 1) % length
-              ].pause();
-              multiTexturesPlane.videos[
-                (currentTexture + length + 1) % length
-              ].pause();
-              isRunning = false;
-            },
+            // onComplete: () => {
+            //   multiTexturesPlane.uniforms.from.value = to;
+            //   multiTexturesPlane.videos[
+            //     (currentTexture + length - 1) % length
+            //   ].pause();
+            //   multiTexturesPlane.videos[
+            //     (currentTexture + length + 1) % length
+            //   ].pause();
+            //   isRunning = false;
+            // },
           });
         });
       });
